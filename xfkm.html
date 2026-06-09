@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>先锋楷模 - 薪火网 · 红色文化传承平台</title>
+    <!-- 沿用主页的 CSS 文件 -->
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+
+    <!-- 本页面特有的内容样式 -->
+    <style>
+        /* 页面主体内容容器 */
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #fffaf5; /* 与主页一致的底色 */
+            min-height: 800px;
+        }
+
+        /* 通用板块标题样式 */
+        .page-section {
+            margin-bottom: 60px;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f0e0d0;
+            padding-bottom: 15px;
+        }
+        .section-header h2 {
+            font-size: 28px;
+            color: #aa0000;
+            margin: 0;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+        .section-header .red-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #aa0000;
+            border-radius: 50%;
+            margin-right: 12px;
+        }
+        .section-header .sub-title {
+            margin-left: 20px;
+            font-size: 14px;
+            color: #8b6b4d;
+            font-weight: normal;
+        }
+
+        /* --- 统一竖版卡片网格布局 (适配 4:3 竖版照片) --- */
+        .vertical-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        /* 竖向卡片核心样式 */
+        .vertical-card {
+            width: 280px;       /* 固定宽度 */
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .vertical-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(170, 0, 0, 0.15);
+        }
+
+        /* 4:3 竖版图片区域 */
+        .vertical-img-box {
+            width: 100%;
+            /* 280px 宽度 * 1.333 (4:3比例) ≈ 373px 高度 */
+            height: 100%; 
+            overflow: hidden;
+            position: relative;
+        }
+        .vertical-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 保证4:3照片完美填充不变形 */
+            transition: transform 0.5s;
+        }
+        .vertical-card:hover .vertical-img-box img {
+            transform: scale(1.05);
+        }
+
+        /* 右上角标签 */
+        .model-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(170, 0, 0, 0.85);
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        /* 底部文字区 */
+        .vertical-info {
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .vertical-info h3 {
+            font-size: 22px;
+            color: #3a2a1f;
+            margin: 0 0 8px 0;
+        }
+        .vertical-info .role {
+            font-size: 13px;
+            color: #aa0000;
+            font-weight: bold;
+            margin-bottom: 12px;
+            display: block;
+            min-height: 36px; /* 保证两行高度对齐 */
+        }
+        .vertical-info p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            text-align: justify;
+            margin: 0;
+        }
+
+        /* 底部装饰沿用主页 */
+        .footer-note {
+            text-align: center;
+            margin-top: 0;
+            padding: 20px;
+            font-size: 14px;
+            color: #5e2a2a;
+            background: #fff2e4;
+            border-top: 1px solid #e2c7b0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- 顶部 Banner 区域 -->
+    <div class="top-banner">
+        <div class="banner-box2">
+			<h1 class="banner-title">先锋楷模</h1>
+		</div>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" title="薪火网首页">
+                    <img src="images/logo.png" alt="薪火网 Logo">
+                </a >
+            </div>
+           <ul class="navCon">
+               <li><a href="index.html">首页</a ></li>
+               <li>
+                   <a href="ghlc.html">光辉历程</a >
+               </li>
+               <li>
+                   <a href="xfkm.html">先锋楷模</a >
+           		<ul>
+           		    <li><a href="xfkm.html#leader">领袖风采</a ></li>
+           		    <li><a href="xfkm.html#pioneers">革命先驱</a ></li>
+           		    <li><a href="xfkm.html#wenxiu">时代楷模</a ></li>
+           		    <li><a href="xfkm.html#models">2026两会新声</a ></li>
+           		</ul>
+               </li>
+               <li>
+                   <a href="hszj.html">红色足迹</a >
+                   <ul>
+                       <li><a href="hszj.html#national">全国地标</a ></li>
+                       <li><a href="hszj.html#local">本地红色资源</a ></li>
+                   </ul>
+               </li>
+               <li>
+                   <a href="sxdt.html">思想灯塔</a >
+               </li>
+               <li>
+                   <a href="hdjl.html">互动交流</a >
+               </li>
+           </ul>
+        </div>
+    </nav>
+
+    <!-- 主内容区 -->
+    <div class="content-wrapper">
+
+        <!-- 板块一：领袖风采（毛泽东） -->
+        <div class="page-section" id="leader">
+            <div class="section-header">
+                <span class="red-dot"></span>
+                <h2>领袖风采</h2>
+                <span class="sub-title">GREAT LEADER</span>
+            </div>
+            
+            <div class="vertical-grid">
+                <div class="vertical-card">
+                    <div class="vertical-img-box">
+                        <span class="model-tag">伟大领袖</span>
+                        <img src="images/毛主席.jpg" alt="毛泽东">
+                    </div>
+                    <div class="vertical-info">
+                        <h3>毛泽东</h3>
+                        <span class="role">中国共产党、解放军和中华人民共和国的主要缔造者</span>
+                        <p>带领中国人民彻底改变了近代以来中华民族任人宰割的悲惨命运，让中国人民从此站起来了。</p >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 板块二：革命先驱（李大钊、方志敏） -->
+        <div class="page-section" id="pioneers">
+            <div class="section-header">
+                <span class="red-dot"></span>
+                <h2>革命先驱</h2>
+                <span class="sub-title">REVOLUTIONARY PIONEERS</span>
+            </div>
+
+            <div class="vertical-grid">
+                <!-- 李大钊 -->
+                <div class="vertical-card">
+                    <div class="vertical-img-box">
+                        <span class="model-tag">革命先驱</span>
+                        <img src="images/李大钊.jpg" alt="李大钊">
+                    </div>
+                    <div class="vertical-info">
+                        <h3>李大钊</h3>
+                        <span class="role">中国共产主义运动的先驱</span>
+                        <p>“铁肩担道义，妙手著文章”。他率先在中国传播马克思主义，为建党作出了重要贡献。</p >
+                    </div>
+                </div>
+                <!-- 方志敏 -->
+                <div class="vertical-card">
+                    <div class="vertical-img-box">
+                        <span class="model-tag">民族英雄</span>
+                        <img src="images/方志敏.jpg" alt="方志敏">
+                    </div>
+                    <div class="vertical-info">
+                        <h3>方志敏</h3>
+                        <span class="role">无产阶级革命家、军事家</span>
+                        <p>他在狱中写下《可爱的中国》，字字泣血，表达了对祖国深沉的爱与对革命必胜的信念。</p >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 板块三：时代楷模（黄文秀） -->
+        <div class="page-section" id="wenxiu">
+            <div class="section-header">
+                <span class="red-dot"></span>
+                <h2>时代楷模</h2>
+                <span class="sub-title">MODEL OF THE TIMES</span>
+            </div>
+
+            <div class="vertical-grid">
+                <!-- 黄文秀 -->
+                <div class="vertical-card">
+                    <div class="vertical-img-box">
+                        <span class="model-tag">脱贫攻坚楷模</span>
+                        <img src="images/文秀.jpg "alt="黄文秀">
+                    </div>
+                    <div class="vertical-info">
+                        <h3>黄文秀</h3>
+                        <span class="role">“最美奋斗者” / 原百坭村第一书记</span>
+                        <p>她放弃大城市机会回乡扶贫，带领群众脱贫致富。年仅30岁不幸遇难，谱写了新时代的青春之歌。</p >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 板块四：2026两会新声（张帆、郑望春、张琼丽） -->
+        <div class="page-section" id="models">
+            <div class="section-header">
+                <span class="red-dot"></span>
+                <h2>2026两会新声</h2>
+                <span class="sub-title">NEW VOICES FROM TWO SESSIONS</span>
+            </div>
+
+            <div class="vertical-grid">
+                <!-- 张帆 -->
+                <div class="vertical-card">
+                    <div class="vertical-img-box">
+                        <span class="model-tag">央企担当</span>
+                        <img src="images/张帆.gif" alt="张帆">
+                    </div>
+                    <div class="vertical-info">
+                        <h3>张帆</h3>
+                        <span class="role">中国电气装备集团副总经理</span>
+                        <p>致力于推动能源装备智能化转型，为保障国家能源安全与特高压技术突破贡献央企力量。</p >
+                    </div>
+                </div>
+
+                <!-- 郑望春 -->
+                <div class="vertical-card">
+                    <div class="vertical-img-box">
+                        <span class="model-tag">四川基层</span>
+                        <img src="images/郑望春.gif" alt="郑望春">
+                    </div>
+                    <div class="vertical-info">
+                        <h3>郑望春</h3>
+                        <span class="role">四川省基层代表 /古路村党支部书记</span>
+                        <p>扎根巴蜀大地，带领乡亲们发展特色农业产业，用朴实行动讲述乡村振兴的生动故事。</p >
+                    </div>
+                </div>
+
+                <!-- 张琼丽 -->
+                <div class="vertical-card">
+                    <div class="vertical-img-box">
+                        <span class="model-tag">湖北一线</span>
+                        <img src="images/张琼丽.gif" alt="张琼丽">
+                    </div>
+                    <div class="vertical-info">
+                        <h3>张琼丽</h3>
+                        <span class="role">湖北省基层代表 / 高级中学教师</span>
+                        <p>长期奋战在社区治理第一线，是居民口中的“贴心人”，为提升城市治理温度建言献策。</p >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 底部装饰 -->
+    <div class="footer-note">
+		抚州职业技术学院
+        © 2026 薪火网 · 红色文化传承平台 版权所有
+    </div>
+</div>
+
+</body>
+</html>
