@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>红色足迹 - 薪火网 · 红色文化传承平台</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+
+    <style>
+        /* 页面主体 */
+        .content-wrapper {
+            max-width: 100%; /* 全屏宽背景 */
+            background-color: #fcfbf7; /* 更有质感的米白宣纸色 */
+            min-height: 800px;
+            overflow: hidden;
+        }
+        .inner-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* 更有设计感的标题 */
+        .page-section { margin-bottom: 80px; }
+        .section-header {
+            margin-bottom: 40px;
+            position: relative;
+            padding-left: 20px;
+        }
+        .section-header h2 {
+            font-size: 36px;
+            color: #8b0000; /* 更深沉的故宫红 */
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: 4px;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        }
+        .section-header .sub-title {
+            font-size: 14px;
+            color: #bfa688;
+            letter-spacing: 2px;
+            margin-top: 5px;
+            font-family: 'Georgia', serif;
+        }
+        /* 标题左侧的装饰竖线 */
+        .section-header::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            bottom: 5px;
+            width: 6px;
+            background: linear-gradient(to bottom, #8b0000, #d4a574);
+            border-radius: 3px;
+        }
+
+        /* --- 1. 全国地标：横向电影感卷轴设计 --- */
+        .national-scroll {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 30px; /* 给阴影留空间 */
+            scroll-behavior: smooth;
+        }
+        /* 隐藏滚动条但保留功能 */
+        .national-scroll::-webkit-scrollbar { height: 6px; }
+        .national-scroll::-webkit-scrollbar-thumb { background: #d4a574; border-radius: 3px; }
+        .national-scroll::-webkit-scrollbar-track { background: #f0e6dc; }
+
+        .scroll-card {
+            flex: 0 0 350px; /* 固定宽度 */
+            height: 450px;   /* 固定高度 */
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .scroll-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        /* 底部渐变遮罩，保证文字清晰 */
+        .scroll-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 60%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 30px 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            transform: translateY(60px); /* 默认隐藏部分文字 */
+            transition: transform 0.4s ease;
+        }
+        .scroll-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(139, 0, 0, 0.25);
+        }
+        .scroll-card:hover img { transform: scale(1.1); }
+        .scroll-card:hover .scroll-overlay { transform: translateY(0); }
+
+        .scroll-location {
+            color: #d4a574;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .scroll-title {
+            color: #fff;
+            font-size: 24px;
+            margin: 0 0 10px 0;
+            font-weight: bold;
+        }
+        .scroll-desc {
+            color: #ddd;
+            font-size: 14px;
+            line-height: 1.6;
+            opacity: 0; /* 默认隐藏描述 */
+            transform: translateY(20px);
+            transition: all 0.4s ease 0.1s;
+        }
+        .scroll-card:hover .scroll-desc { opacity: 1; transform: translateY(0); }
+
+        /* --- 2. 抚州本地：错落时光印记（仿瀑布流/印章风） --- */
+        .fuzhou-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            padding: 20px 0;
+        }
+        .memory-card {
+            background: #fff;
+            padding: 15px 15px 25px 15px; /* 像拍立得照片的白边 */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transform: rotate(-1deg); /* 微微倾斜，制造随意感 */
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        /* 让偶数卡片向相反方向倾斜 */
+        .memory-card:nth-child(even) { transform: rotate(1deg); }
+        .memory-card:hover {
+            transform: rotate(0deg) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            z-index: 10;
+        }
+
+        /* 红色印章标签 */
+        .seal-tag {
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border: 2px solid #b71c1c;
+            color: #b71c1c;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            writing-mode: vertical-rl; /* 竖排文字 */
+            letter-spacing: 2px;
+            background: #fff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            z-index: 2;
+        }
+
+        .memory-img {
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+            filter: sepia(20%); /* 微微的复古怀旧色调 */
+            transition: filter 0.3s;
+        }
+        .memory-card:hover .memory-img { filter: sepia(0%); }
+        .memory-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .memory-info {
+            padding-top: 15px;
+            text-align: center;
+        }
+        .memory-info h3 {
+            font-size: 20px;
+            color: #333;
+            margin: 0 0 8px 0;
+            font-family: 'Songti SC', 'SimSun', serif; /* 使用宋体更有文化感 */
+        }
+        .memory-info p {
+            font-size: 13px;
+            color: #777;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .footer-note {
+            text-align: center;
+            padding: 30px;
+            font-size: 14px;
+            color: #8b6b4d;
+            background: #f4ece2;
+            border-top: 1px solid #e2c7b0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="top-banner">
+		<div class="banner-box3">
+			<h1 class="banner-title">红色足迹</h1>
+		</div>
+	</div>
+
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html"><img src="images/logo.png" alt="薪火网 Logo"></a >
+            </div>
+           <ul class="navCon">
+               <li><a href="index.html">首页</a ></li>
+               <li>
+                   <a href="ghlc.html">光辉历程</a >
+               </li>
+               <li>
+                   <a href="xfkm.html">先锋楷模</a >
+           		<ul>
+           		    <li><a href="xfkm.html#leader">领袖风采</a ></li>
+           		    <li><a href="xfkm.html#pioneers">革命先驱</a ></li>
+           		    <li><a href="xfkm.html#wenxiu">时代楷模</a ></li>
+           		    <li><a href="xfkm.html#models">2026两会新声</a ></li>
+           		</ul>
+               </li>
+               <li>
+                   <a href="hszj.html">红色足迹</a >
+                   <ul>
+                       <li><a href="hszj.html#national">全国地标</a ></li>
+                       <li><a href="hszj.html#local">本地红色资源</a ></li>
+                   </ul>
+               </li>
+               <li>
+                   <a href="sxdt.html">思想灯塔</a >
+               </li>
+               <li>
+                   <a href="hdjl.html">互动交流</a >
+               </li>
+           </ul>
+        </div>
+    </nav>
+
+    <div class="content-wrapper">
+        <div class="inner-container">
+
+            <!-- 板块一：全国地标（横向卷轴电影感） -->
+            <div class="page-section" id="national">
+                <div class="section-header">
+                    <h2>全国地标</h2>
+                    <div class="sub-title">NATIONAL RED LANDMARKS</div>
+                </div>
+                
+                <div class="national-scroll">
+                    <!-- 中共一大会址 -->
+                    <div class="scroll-card">
+                        <img src="images/中共.png" alt="中共一大会址">
+                        <div class="scroll-overlay">
+                            <div class="scroll-location">📍 上海 · 兴业路76号</div>
+                            <h3 class="scroll-title">中共一大会址</h3>
+                            <p class="scroll-desc">中国共产党人的精神家园，1921年伟大的开端，中国革命的原点。</p >
+                        </div>
+                    </div>
+
+                    <!-- 井冈山 -->
+                    <div class="scroll-card">
+                        <img src="images/井冈山.png" alt="井冈山">
+                        <div class="scroll-overlay">
+                            <div class="scroll-location">📍 江西 · 吉安</div>
+                            <h3 class="scroll-title">井冈山革命根据地</h3>
+                            <p class="scroll-desc">中国革命的摇篮，星星之火在这里燎原，开辟了农村包围城市的道路。</p >
+                        </div>
+                    </div>
+
+                    <!-- 遵义会议 -->
+                    <div class="scroll-card">
+                        <img src="images/遵义.png" alt="遵义会议">
+                        <div class="scroll-overlay">
+                            <div class="scroll-location">📍 贵州 · 遵义</div>
+                            <h3 class="scroll-title">遵义会议会址</h3>
+                            <p class="scroll-desc">生死攸关的转折点，确立了毛泽东同志的领导地位，挽救了党和红军。</p >
+                        </div>
+                    </div>
+
+                    <!-- 延安 -->
+                    <div class="scroll-card">
+                        <img src="images/延安.png" alt="延安">
+                        <div class="scroll-overlay">
+                            <div class="scroll-location">📍 陕西 · 延安</div>
+                            <h3 class="scroll-title">延安革命圣地</h3>
+                            <p class="scroll-desc">宝塔山下的十三年，中国革命的落脚点与出发点，指引方向的灯塔。</p >
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 板块二：抚州本地（错落时光印记） -->
+            <div class="page-section" id="local">
+                <div class="section-header">
+                    <h2>本地红色资源 · 抚州</h2>
+                    <div class="sub-title">LOCAL RED MEMORY IN FUZHOU</div>
+                </div>
+
+                <div class="fuzhou-grid">
+                    <!-- 黎川 -->
+                    <div class="memory-card">
+                        <div class="seal-tag">苏区<br>记忆</div>
+                        <div class="memory-img">
+                            <img src="images/闽.png" alt="闽赣省革命旧址">
+                        </div>
+                        <div class="memory-info">
+                            <h3>闽赣省革命旧址</h3>
+                            <p>位于黎川老街，见证了中央苏区东北大门的峥嵘岁月，是土地革命时期的重要指挥中心。</p >
+                        </div>
+                    </div>
+
+                    <!-- 广昌 -->
+                    <div class="memory-card">
+                        <div class="seal-tag">战役<br>遗址</div>
+                        <div class="memory-img">
+                            <img src="images/高虎脑.png" alt="高虎脑战役">
+                        </div>
+                        <div class="memory-info">
+                            <h3>广昌高虎脑战役</h3>
+                            <p>长征前的一场惨烈阻击战，红军将士以血肉之躯迟滞敌军，被誉为悲壮的“血肉磨坊”。</p >
+                        </div>
+                    </div>
+
+                    <!-- 南丰 -->
+                    <div class="memory-card">
+                        <div class="seal-tag">红色<br>南丰</div>
+                        <div class="memory-img">
+                            <img src="images/南.png" alt="南丰红色旧址">
+                        </div>
+                        <div class="memory-info">
+                            <h3>南丰红色文化旧址</h3>
+                            <p>原中央苏区全红县，保留了大量珍贵的红军标语，记录了红一方面军发动群众的辉煌历史。</p >
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer-note">
+		抚州职业技术学院
+        © 2026 薪火网 · 红色文化传承平台 版权所有
+    </div>
+</div>
+
+</body>
+</html>
