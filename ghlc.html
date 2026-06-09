@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>光辉历程 - 薪火网 · 红色文化传承平台</title>
+    <!-- 引入与首页相同的外部样式表 -->
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    
+    <!-- 本页专属样式（避免与首页其他卡片冲突） -->
+    <style>
+        /* 光辉历程专属网格布局 */
+        .gj-periods-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 强制4列 */
+            gap: 25px; /* 卡片间距 */
+            margin-top: 20px;
+        }
+
+        /* 单个卡片样式 */
+        .gj-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 35px 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(170, 0, 0, 0.08);
+            border: 1px solid #f5e6d8;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 悬停上浮效果 */
+        .gj-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(170, 0, 0, 0.15);
+            border-color: #aa0000;
+        }
+
+        /* 顶部红色装饰条 */
+        .gj-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: #aa0000;
+        }
+
+        /* 图标区域 */
+        .gj-icon-box {
+            width: 70px; height: 70px;
+            background: #fffaf5;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 32px; margin-bottom: 20px;
+            border: 1px solid #f0e0d0;
+            transition: all 0.3s;
+        }
+        .gj-card:hover .gj-icon-box {
+            background: #aa0000;
+            color: #fff;
+            border-color: #aa0000;
+        }
+
+        /* 标题 */
+        .gj-card h3 {
+            font-size: 20px;
+            color: #aa0000;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        /* 描述文字 */
+        .gj-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            flex-grow: 1; /* 保证按钮底部对齐 */
+        }
+
+        /* 按钮 */
+        .gj-link {
+            font-size: 14px;
+            color: #aa0000;
+            text-decoration: none;
+            border: 1px solid #aa0000;
+            padding: 6px 24px;
+            border-radius: 20px;
+            transition: all 0.2s;
+        }
+        .gj-link:hover {
+            background: #aa0000;
+            color: #fff;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 900px) {
+            .gj-periods-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .gj-periods-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 顶部 Banner 区域 -->
+    <div class="top-banner">
+        <div class="banner-box1">
+			<h1 class="banner-title">光辉历程</h1>
+		</div>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html" title="薪火网首页">
+                    <img src="images/logo.png" alt="薪火网 Logo">
+                </a >
+            </div>
+           <ul class="navCon">
+               <li><a href="index.html">首页</a ></li>
+               <li>
+                   <a href="ghlc.html">光辉历程</a >
+               </li>
+               <li>
+                   <a href="xfkm.html">先锋楷模</a >
+           		<ul>
+           		    <li><a href="xfkm.html#leader">领袖风采</a ></li>
+           		    <li><a href="xfkm.html#pioneers">革命先驱</a ></li>
+           		    <li><a href="xfkm.html#wenxiu">时代楷模</a ></li>
+           		    <li><a href="xfkm.html#models">2026两会新声</a ></li>
+           		</ul>
+               </li>
+               <li>
+                   <a href="hszj.html">红色足迹</a >
+                   <ul>
+                       <li><a href="hszj.html#national">全国地标</a ></li>
+                       <li><a href="hszj.html#local">本地红色资源</a ></li>
+                   </ul>
+               </li>
+               <li>
+                   <a href="sxdt.html">思想灯塔</a >
+               </li>
+               <li>
+                   <a href="hdjl.html">互动交流</a >
+               </li>
+           </ul>
+        </div>
+    </nav>
+
+    <!-- 主内容区域 -->
+        <!-- 主内容区域 -->
+        <main class="site-main">
+            <section class="section">
+                <div class="container-content">
+                    <h2 class="section-title"><span class="red-dot"></span>光辉历程 · 学习馆</h2>
+                    
+                    <!-- 核心布局：左侧时间轴 + 右侧内容展开区 -->
+                    <div class="timeline-wrapper">
+                        
+                        <!-- 左侧：时间轴导航 -->
+                        <div class="timeline-nav">
+                            <div class="timeline-item active" onclick="switchPeriod(0, this)"id="nav-jd">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-date">1921</div>
+                                <div class="timeline-label"id="jd">建党时期</div>
+                            </div>
+                            <div class="timeline-item" onclick="switchPeriod(1, this)"id="nav-gm">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-date">1927</div>
+                                <div class="timeline-label"id="gm">革命战争</div>
+                            </div>
+                            <div class="timeline-item" onclick="switchPeriod(2, this)"id="nav-xzg">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-date">1949</div>
+                                <div class="timeline-label"id="xzg">新中国成立</div>
+                            </div>
+                            <div class="timeline-item" onclick="switchPeriod(3, this)"id="nav-xdh">
+                                <div class="timeline-dot"></div>
+                                <div class="timeline-date">1978</div>
+                                <div class="timeline-label"id="xdh">现代化建设</div>
+                            </div>
+                            <!-- 连接线 -->
+                            <div class="timeline-line"></div>
+                        </div>
+    
+                        <!-- 右侧：内容展开覆盖区 -->
+                        <div class="timeline-content-box">
+                            <!-- 内容 1：建党时期 -->
+                            <div class="period-detail active" id="period-0">
+                                <div class="detail-header">
+                                    <h3>🚩 开天辟地：建党时期 (1921-1949)</h3>
+                                    <span class="detail-tag">红船精神</span>
+                                </div>
+                                <div class="detail-body">
+                                    <p>1921年7月，中国共产党第一次全国代表大会在上海召开，标志着中国共产党的正式成立。这是中国历史上开天辟地的大事变，从此中国革命的面貌焕然一新。</p >
+                                    <ul class="history-points">
+                                        <li>🔹 中共一大：红船启航</li>
+                                        <li>🔹 二七罢工：工人运动高潮</li>
+                                        <li>🔹 遵义会议：伟大的转折点</li>
+                                    </ul>
+                                </div>
+                            </div>
+    
+                            <!-- 内容 2：革命战争 -->
+                            <div class="period-detail" id="period-1">
+                                <div class="detail-header">
+                                    <h3>⚔️ 浴血奋战：革命战争时期 (1927-1949)</h3>
+                                    <span class="detail-tag">长征精神</span>
+                                </div>
+                                <div class="detail-body">
+                                    <p>从南昌起义打响武装反抗国民党反动派的第一枪，到井冈山革命根据地的建立，再到二万五千里长征。中国共产党领导人民军队，经过22年艰苦卓绝的斗争，终于推翻了“三座大山”。</p >
+                                    <ul class="history-points">
+                                        <li>🔹 南昌起义：武装反抗第一枪</li>
+                                        <li>🔹 抗日战争：全民族抗战</li>
+                                        <li>🔹 解放战争：百万雄师过大江</li>
+                                    </ul>
+                                </div>
+                            </div>
+    
+                            <!-- 内容 3：新中国成立 -->
+                            <div class="period-detail" id="period-2">
+                                <div class="detail-header">
+                                    <h3>🇨🇳 改天换地：新中国成立时期 (1949-1978)</h3>
+                                    <span class="detail-tag">两弹一星</span>
+                                </div>
+                                <div class="detail-body">
+                                    <p>1949年10月1日，中华人民共和国成立。党领导人民自力更生、发愤图强，确立了社会主义基本制度，推进了社会主义建设，为当代中国一切发展进步奠定了根本政治前提和制度基础。</p >
+                                    <ul class="history-points">
+                                        <li>🔹 开国大典：中国人民站起来了</li>
+                                        <li>🔹 抗美援朝：保家卫国</li>
+                                        <li>🔹 两弹一星：大国重器</li>
+                                    </ul>
+                                </div>
+                            </div>
+    
+                            <!-- 内容 4：现代化建设 -->
+                            <div class="period-detail" id="period-3">
+                                <div class="detail-header">
+                                    <h3>🚀 惊天动地：现代化建设时期 (1978-至今)</h3>
+                                    <span class="detail-tag">改革开放</span>
+                                </div>
+                                <div class="detail-body">
+                                    <p>1978年十一届三中全会开启了改革开放的历史新时期。党领导人民解放思想、锐意进取，实现了从生产力相对落后到经济总量跃居世界第二的历史性突破。</p >
+                                    <ul class="history-points">
+                                        <li>🔹 改革开放：春天的故事</li>
+                                        <li>🔹 脱贫攻坚：全面小康</li>
+                                        <li>🔹 新时代：民族复兴新征程</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- 新增板块：党课微测验（互动问答模式） -->
+            <section class="section" style="background: #fffaf5;">
+                <div class="container-content">
+                    <h2 class="section-title"><span class="red-dot"></span>党课微测验</h2>
+                    <div class="quiz-container">
+                        <div class="quiz-question">
+                            <p><strong>【单选题】</strong> 中国共产党第一次全国代表大会是在哪一年召开的？标志着中国共产党的正式成立。</p >
+                        </div>
+                        <div class="quiz-options">
+                            <button class="quiz-btn" onclick="checkAnswer(this, false)">A. 1919年</button>
+                            <button class="quiz-btn" onclick="checkAnswer(this, true)">B. 1921年</button>
+                            <button class="quiz-btn" onclick="checkAnswer(this, false)">C. 1949年</button>
+                            <button class="quiz-btn" onclick="checkAnswer(this, false)">D. 1978年</button>
+                        </div>
+                        <!-- 答对后解锁的区域 -->
+                        <div class="quiz-unlock-area" id="unlockArea" style="display: none;">
+                            <div class="unlock-success">
+                                <span>🎉 回答正确！学习权限已解锁</span>
+                            </div>
+                            <a href="hdjl.html" class="btn-interact">📝 撰写本课学习心得</a >
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+        </main>
+    <!-- 底部占位装饰（与首页保持一致） -->
+    <div class="footer-note">
+		抚州职业技术学院
+        薪火相传 红色基因 | 不忘初心 砥砺前行
+    </div>
+</div>
+<script>
+    // 1. 时间轴切换逻辑
+    function switchPeriod(index, element) {
+        // 移除所有导航的激活状态
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        // 激活当前点击的导航
+        element.classList.add('active');
+
+        // 隐藏所有内容
+        document.querySelectorAll('.period-detail').forEach(detail => {
+            detail.classList.remove('active');
+        });
+        // 显示对应的内容
+        document.getElementById('period-' + index).classList.add('active');
+    }
+
+    // 2. 答题解锁逻辑
+    function checkAnswer(btn, isCorrect) {
+        const unlockArea = document.getElementById('unlockArea');
+        
+        // 重置所有按钮样式
+        document.querySelectorAll('.quiz-btn').forEach(b => {
+            b.style.background = '#fffaf5';
+            b.style.color = '#aa0000';
+            b.disabled = true; // 答完后禁止再点
+        });
+
+        if (isCorrect) {
+            btn.style.background = '#28a745'; // 绿色表示正确
+            btn.style.color = '#fff';
+            btn.style.borderColor = '#28a745';
+            // 显示解锁区域
+            unlockArea.style.display = 'block';
+        } else {
+            btn.style.background = '#dc3545'; // 红色表示错误
+            btn.style.color = '#fff';
+            btn.style.borderColor = '#dc3545';
+            // 答错显示提示（可选）
+            alert("回答错误，请回顾上方时间轴内容后再试！（已自动刷新页面）");
+            setTimeout(() => location.reload(), 1500);
+        }
+    }
+
+</script>
+<script>
+	    // 等待页面完全加载完毕后再执行
+	    window.addEventListener('DOMContentLoaded', function() {
+	        // 1. 获取 URL 中的参数 (例如 ?type=gm)
+	        const urlParams = new URLSearchParams(window.location.search);
+	        const targetType = urlParams.get('type');
+	
+	        // 2. 如果有参数，就执行切换逻辑
+	        if (targetType) {
+	            let targetId = '';
+	
+	            // 根据参数值匹配对应的 ID
+	            switch(targetType) {
+	                case 'jd': targetId = 'nav-jd'; break;   // 建党
+	                case 'gm': targetId = 'nav-gm'; break;   // 革命
+	                case 'xzg': targetId = 'nav-xzg'; break; // 新中国
+	                case 'xdh': targetId = 'nav-xdh'; break; // 现代化
+	            }
+	
+	            // 3. 找到那个元素并模拟点击
+	            if (targetId) {
+	                const element = document.getElementById(targetId);
+	                if (element) {
+	                    // 触发点击事件，这会自动调用你原来的 switchPeriod 函数
+	                    element.click();
+	                }
+	            }
+	        }
+	    });
+	</script>
+</body>
+</html>
