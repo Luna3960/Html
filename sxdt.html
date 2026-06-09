@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>思想灯塔 · 精神谱系与每日金句</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css"> <!-- 确保路径正确 -->
+    
+    <!-- 补充精神谱系和弹窗的专用样式 -->
+    <style>
+        /* ===== 精神谱系网格样式 ===== */
+        .spirit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+        .spirit-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 15px rgba(170, 0, 0, 0.06);
+            border-left: 5px solid #aa0000;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .spirit-card::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 60px; height: 60px;
+            background: radial-gradient(circle, rgba(170,0,0,0.08) 0%, transparent 70%);
+            border-radius: 0 0 0 60px;
+        }
+        .spirit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(170, 0, 0, 0.12);
+            border-left-color: #ff4d4d;
+        }
+        .spirit-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #aa0000;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .spirit-name::before {
+            content: '★';
+            font-size: 16px;
+            color: #ffc285;
+        }
+        .spirit-desc {
+            font-size: 15px;
+            color: #5e4b36;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .spirit-tag {
+            display: inline-block;
+            background: #fff5ed;
+            color: #aa0000;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        /* ===== 模态框样式 (复用并微调) ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: #fffaf5;
+            padding: 30px;
+            border-radius: 16px;
+            width: 90%; max-width: 500px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(170,0,0,0.2);
+            border: 1px solid #f0e0d0;
+            animation: slideDown 0.3s ease;
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .close-modal {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 28px; font-weight: bold;
+            color: #8b6b4d; cursor: pointer;
+        }
+        .close-modal:hover { color: #aa0000; }
+        .modal-content h3 {
+            color: #aa0000;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+        .form-group { margin-bottom: 15px; }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #5e4b36;
+            font-weight: 500;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e2c7b0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 16px;
+            background: #fff;
+            outline: none;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #aa0000;
+            box-shadow: 0 0 5px rgba(170,0,0,0.2);
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background: #aa0000;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn-submit:hover { background: #8b0000; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- 顶部 Banner & 导航 (保持你原有结构) -->
+    <header class="top-banner"><div class="banner-box"></div></header>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo"><a href=" "><img src="images/logo.png" alt="Logo"></a ></div>
+            <ul class="navCon">
+                <li><a href="index.html">首页</a ></li>
+                <li>
+                    <a href="ghlc.html">光辉历程</a >
+                </li>
+                <li>
+                    <a href="xfkm.html">先锋楷模</a >
+            		<ul>
+            		    <li><a href="xfkm.html#leader">领袖风采</a ></li>
+            		    <li><a href="xfkm.html#pioneers">革命先驱</a ></li>
+            		    <li><a href="xfkm.html#wenxiu">时代楷模</a ></li>
+            		    <li><a href="xfkm.html#models">2026两会新声</a ></li>
+            		</ul>
+                </li>
+                <li>
+                    <a href="hszj.html">红色足迹</a >
+                    <ul>
+                        <li><a href="hszj.html#national">全国地标</a ></li>
+                        <li><a href="hszj.html#local">本地红色资源</a ></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="sxdt.html">思想灯塔</a >
+                </li>
+                <li>
+                    <a href="hdjl.html">互动交流</a >
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主内容区域 -->
+    <main class="site-main">
+        <div class="container-content">
+            
+            <!-- 1. 思想灯塔 · 每日金句轮播 -->
+            <section class="lighthouse-carousel-section">
+                <div class="carousel-wrapper">
+                    <div class="carousel-bg"></div>
+                    <div class="carousel-overlay"></div>
+                    <div class="carousel-container">
+                        <h2 class="carousel-title">思想灯塔 · 每日金句</h2>
+                        <div class="swiper-quote">
+                            <div class="quote-item active">
+                                <p class="quote-text">“坚持真理、坚守理想，践行初心、担当使命。”</p >
+                                <span class="quote-author">—— 伟大建党精神</span>
+                            </div>
+                            <div class="quote-item">
+                                <p class="quote-text">“把别人的困难当成自己的困难，把同志的愉快看成自己的幸福。”</p >
+                                <span class="quote-author">—— 雷锋精神</span>
+                            </div>
+                            <div class="quote-item">
+                                <p class="quote-text">“特别能吃苦、特别能战斗、特别能攻关、特别能奉献。”</p >
+                                <span class="quote-author">—— 载人航天精神</span>
+                            </div>
+                        </div>
+                        <div class="carousel-dots">
+                            <span class="dot active" onclick="currentSlide(0)"></span>
+                            <span class="dot" onclick="currentSlide(1)"></span>
+                            <span class="dot" onclick="currentSlide(2)"></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. 中国共产党人精神谱系 (核心新增板块) -->
+            <section class="section">
+                <h3 class="section-title"><span class="red-dot"></span>中国共产党人精神谱系</h3>
+                <p style="color:#6b4e32; margin-bottom:20px; font-size:16px;">
+                    一百多年来，中国共产党弘扬伟大建党精神，在长期奋斗中构建起中国共产党人的精神谱系，锤炼出鲜明的政治品格。
+                </p >
+                
+                <div class="spirit-grid">
+                    <!-- 精神卡片 1 -->
+                    <div class="spirit-card">
+                        <div class="spirit-name">伟大建党精神</div>
+                        <p class="spirit-desc">坚持真理、坚守理想，践行初心、担当使命，不怕牺牲、英勇斗争，对党忠诚、不负人民。这是中国共产党的精神之源。</p >
+                        <span class="spirit-tag">精神之源</span>
+                    </div>
+                    <!-- 精神卡片 2 -->
+                    <div class="spirit-card">
+                        <div class="spirit-name">井冈山精神</div>
+                        <p class="spirit-desc">坚定信念、艰苦奋斗，实事求是、闯出新路，依靠群众、勇于胜利。点燃了工农武装割据的星星之火。</p >
+                        <span class="spirit-tag">革命摇篮</span>
+                    </div>
+                    <!-- 精神卡片 3 -->
+                    <div class="spirit-card">
+                        <div class="spirit-name">长征精神</div>
+                        <p class="spirit-desc">把全国人民和中华民族的根本利益看得高于一切，坚定革命的理想和信念，坚信正义事业必然胜利的精神。</p >
+                        <span class="spirit-tag">英雄史诗</span>
+                    </div>
+                    <!-- 精神卡片 4 -->
+                    <div class="spirit-card">
+                        <div class="spirit-name">“两弹一星”精神</div>
+                        <p class="spirit-desc">热爱祖国、无私奉献，自力更生、艰苦奋斗，大力协同、勇于登攀。挺起了民族脊梁。</p >
+                        <span class="spirit-tag">科技强国</span>
+                    </div>
+                    <!-- 精神卡片 5 -->
+                    <div class="spirit-card">
+                        <div class="spirit-name">脱贫攻坚精神</div>
+                        <p class="spirit-desc">上下同心、尽锐出战、精准务实、开拓创新、攻坚克难、不负人民。创造了人类减贫史上的奇迹。</p >
+                        <span class="spirit-tag">时代丰碑</span>
+                    </div>
+                    <!-- 精神卡片 6 -->
+                    <div class="spirit-card">
+                        <div class="spirit-name">抗疫精神</div>
+                        <p class="spirit-desc">生命至上、举国同心、舍生忘死、尊重科学、命运与共。展现了中国力量、中国精神、中国效率。</p >
+                        <span class="spirit-tag">人民至上</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 互动区：上传金句/心得 -->
+            <section class="interact-section">
+                <div class="interact-buttons">
+                    <a href="javascript:void(0);" class="btn-interact" onclick="openModal()">✨ 点亮灯塔 · 分享金句</a >
+                    <a href="#" class="btn-interact" style="background:#8b6b4d;">📖 精神谱系全览</a >
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <div class="footer-note">抚州职业技术学院© 2026 薪火网 · 红色文化传承平台 | 让信仰之火生生不息</div>
+</div>
+
+<!-- 上传弹窗 -->
+<div class="modal-overlay" id="uploadModal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <h3>✨ 分享你的思想感悟</h3>
+        <form id="uploadForm">
+            <div class="form-group">
+                <label>金句 / 心得内容：</label>
+                <textarea id="quoteText" rows="4" placeholder="请输入触动你的话语或学习体会..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label>关联精神 / 出处：</label>
+                <input type="text" id="quoteAuthor" placeholder="例如：长征精神 / 《论中国共产党历史》">
+            </div>
+            <button type="submit" class="btn-submit">提交点亮</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // --- 轮播逻辑 ---
+    let currentIndex = 0;
+    const slides = document.querySelectorAll('.quote-item');
+    const dots = document.querySelectorAll('.dot');
+
+    function showSlide(index) {
+        slides.forEach(s => s.classList.remove('active'));
+        dots.forEach(d => d.classList.remove('active'));
+        slides[index].classList.add('active');
+        dots[index].classList.add('active');
+        currentIndex = index;
+    }
+
+    function currentSlide(index) {
+        showSlide(index);
+        clearInterval(slideInterval);
+        slideInterval = setInterval(autoPlay, 5000);
+    }
+
+    function autoPlay() {
+        showSlide((currentIndex + 1) % slides.length);
+    }
+    let slideInterval = setInterval(autoPlay, 5000);
+
+    // --- 弹窗逻辑 ---
+    const modal = document.getElementById('uploadModal');
+    function openModal() { modal.style.display = 'flex'; }
+    function closeModal() { modal.style.display = 'none'; }
+    window.onclick = e => { if (e.target === modal) closeModal(); };
+
+    document.getElementById('uploadForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert("✅ 提交成功！\n\n您的感悟将汇入思想灯塔，照亮更多人。\n\n(注：实际需对接后端数据库)");
+        closeModal();
+        this.reset();
+    });
+</script>
+
+</body>
+</html>
